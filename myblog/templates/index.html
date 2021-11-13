@@ -11,38 +11,37 @@
   </head>
   <body>
     <div id="home">
-      <h6>my page</h6>
-      <img src="static/img/default.png" alt="" />
-      <hr />
-      <p v-if="movices.length==0">no data</p>
-      <div class="img_list">
-        <img alt="" v-bind:src="apiurl + a.pic" v-for="a in movices" />
+      <div class="header">
+        <h4>{{siteinfo.title}}</h4>
+        <img src="/upload/{{siteinfo.icon}}" alt="" />
       </div>
-      <button v-on:click="getData()">get data</button>
+
+      <hr />
+
+      <div class="content">
+        <div class="menu">
+          <div class="item">
+            <span>Django backend</span>
+          </div>
+          <div class="item">
+            <span>Vue frontend</span>
+          </div>
+          <div class="item">
+            <span>Real project</span>
+          </div>
+          <div class="item">
+            <span>Deploy project</span>
+          </div>
+        </div>
+
+        <div class="userlist"></div>
+      </div>
+
+      <hr />
+
+      <div class="foot">Copyright © 2021 Skycoco</div>
     </div>
 
-    <script>
-      new Vue({
-        el: "#home",
-        data: {
-          apiurl: "https://api.dweb.club/",
-          movices: [],
-        },
-        methods: {
-          getData() {
-            console.log("get data now");
-            var self = this;
-            axios({
-              methods: "get",
-              type: "json",
-              url: "https://api.dweb.club/dweb-api/get-index-data/",
-            }).then(function (res) {
-              console.log(res.data.newsdata);
-              self.movices = res.data.newsdata;
-            });
-          },
-        },
-      });
-    </script>
+    <script></script>
   </body>
 </html>

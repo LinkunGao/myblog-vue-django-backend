@@ -1,5 +1,5 @@
 #home {
-  width: 300px;
+  width: 700px;
   height: auto;
   border: 1px solid black;
   margin: 0 auto;
@@ -15,4 +15,32 @@
   width: 120px;
   height: 120px;
   border-radius: 0;
+}
+
+#home .header {
+  background: rgb(104, 74, 134);
+}
+
+#home .header h4 {
+  color: #fff;
+}
+
+#home .content .menu {
+  display: flex;
+  align-content: center;
+  padding: 5px 10px;
+}
+
+#home .content .menu .item {
+  width: 25%;
+  /* margin-right: 5px; */
+  border: 1px solid black;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+#home .content .userlist {
+  height: 200px;
+  border: 1px solid black;
 }
