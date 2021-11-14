@@ -41,6 +41,19 @@
 }
 
 #home .content .userlist {
-  height: 200px;
+  min-width: 700px;
+  min-height: 200px;
+  height: auto;
   border: 1px solid black;
+}
+
+#home .content .userlist .user-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#home .content .userlist .user {
+  margin: 5px 15px;
 }
