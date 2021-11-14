@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="static/css/mystyle.css" />
+    <link rel="stylesheet" href="/static/css/mystyle.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
@@ -20,21 +20,27 @@
 
       <div class="content">
         <div class="menu">
+          {% for crouse in crouses %}
           <div class="item">
-            <span>Django backend</span>
+            <a href="/menu/?id={{crouse.id}}">{{crouse.text}}</a>
           </div>
-          <div class="item">
-            <span>Vue frontend</span>
-          </div>
-          <div class="item">
-            <span>Real project</span>
-          </div>
-          <div class="item">
-            <span>Deploy project</span>
-          </div>
+          {% endfor %}
         </div>
 
-        <div class="userlist"></div>
+        <div class="userlist">
+          <div>All users</div>
+          <hr />
+          <div class="user-content">
+            {% if users %} {% for user in users %}
+            <div class="user">
+              <img src="/upload/{{user.icon}}" alt="" />
+              <p>{{user.nickName}}</p>
+            </div>
+            {% endfor %} {%else%}
+            <p>Oops, on users right now!</p>
+            {% endif %}
+          </div>
+        </div>
       </div>
 
       <hr />
