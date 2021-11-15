@@ -11,52 +11,61 @@
   </head>
   <body>
     <div id="home">
-      <div class="header">
-        <h4>{{siteinfo.title}}</h4>
-        <img src="/upload/{{siteinfo.icon}}" alt="" />
-      </div>
+      <div v-if="onOff">
+        <div class="header">
+          <h4>{{siteinfo.title}}</h4>
+          <img src="/upload/{{siteinfo.icon}}" alt="" />
+        </div>
+        <hr />
+        <div class="content">
+          <div class="menu">
+            <div
+              v-if="course.id==choosed"
+              v-for="course in courses"
+              class="item"
+              style="background: #777; color: #fff"
+            >
+              <a>[[course.text]]</a>
+            </div>
+            <div v-else v-on:click="chooseMenu(course.id)" class="item">
+              <a>[[course.text]]</a>
+            </div>
+          </div>
 
-      <hr />
-
-      <div class="content">
-        <div class="menu">
           <div
             v-if="course.id==choosed"
             v-for="course in courses"
-            class="item"
-            style="background: #777; color: #fff"
+            class="userlist"
           >
-            <a>[[course.text]]</a>
-          </div>
-          <div v-else v-on:click="chooseMenu(course.id)" class="item">
-            <a>[[course.text]]</a>
-          </div>
-        </div>
-
-        <div
-          v-if="course.id==choosed"
-          v-for="course in courses"
-          class="userlist"
-        >
-          <div>[[course.text]]</div>
-          <hr />
-          <div class="user-content">
-            <div
-              v-if="course.users.length>0"
-              v-for="user in course.users"
-              class="user"
-            >
-              <img v-bind:src="baseUrl + user.userIcon" alt="" />
-              <p>[[user.nickName]]</p>
+            <div>[[course.text]]</div>
+            <hr />
+            <div class="user-content">
+              <div
+                v-if="course.users.length>0"
+                v-for="user in course.users"
+                class="user"
+              >
+                <img v-bind:src="baseUrl + user.userIcon" alt="" />
+                <p>[[user.nickName]]</p>
+              </div>
+              <p v-else>Oops, on users right now!</p>
             </div>
-            <p v-else>Oops, on users right now!</p>
           </div>
         </div>
+        <hr />
       </div>
-
-      <hr />
-
-      <div class="foot">Copyright © 2021 Skycoco</div>
+      <input
+        v-model="inputText"
+        type="text"
+        name=""
+        id=""
+        style="height: 30px; width: 650px"
+      />
+      <p>[[inputText]]</p>
+      <div class="foot">
+        Copyright © 2021 Skycoco
+        <button @click="onOffClick">Switch</button>
+      </div>
     </div>
 
     <script>
@@ -64,14 +73,19 @@
         delimiters: ["[[", "]]"],
         el: "#home",
         data: {
+          inputText: "",
           baseUrl: "/upload/",
           choosed: 1,
           courses: [],
+          onOff: true,
         },
         mounted() {
           this.getData();
         },
         methods: {
+          onOffClick() {
+            this.onOff = !this.onOff;
+          },
           getData() {
             axios({
               url: "/api/",
