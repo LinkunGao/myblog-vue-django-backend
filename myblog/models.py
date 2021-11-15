@@ -10,7 +10,7 @@ class SiteInfo(models.Model):
         return self.id
 
 # crouse categories
-class Crouses(models.Model):
+class Courses(models.Model):
     text = models.CharField(null=True,blank=True, max_length=50)
     def __str__(self):
         return self.text
@@ -19,7 +19,7 @@ class Crouses(models.Model):
 class UserInfo(models.Model):
     nickName = models.CharField(null=True,blank=True, max_length=50)
     icon = models.ImageField(upload_to='user_icon/', null=True, blank=True)
-    belong = models.ForeignKey(Crouses, on_delete=models.SET_NULL, related_name="userinfo_crouses", null=True, blank=True)
+    belong = models.ForeignKey(Courses, on_delete=models.SET_NULL, related_name="userinfo_courses", null=True, blank=True)
 
     def __str__(self):
         return self.nickName

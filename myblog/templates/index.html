@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/mystyle.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/axios.js"></script>
   </head>
   <body>
     <div id="home">
@@ -20,25 +20,36 @@
 
       <div class="content">
         <div class="menu">
-          {% for crouse in crouses %}
-          <div class="item">
-            <a href="/menu/?id={{crouse.id}}">{{crouse.text}}</a>
+          <div
+            v-if="course.id==choosed"
+            v-for="course in courses"
+            class="item"
+            style="background: #777; color: #fff"
+          >
+            <a>[[course.text]]</a>
           </div>
-          {% endfor %}
+          <div v-else v-on:click="chooseMenu(course.id)" class="item">
+            <a>[[course.text]]</a>
+          </div>
         </div>
 
-        <div class="userlist">
-          <div>All users</div>
+        <div
+          v-if="course.id==choosed"
+          v-for="course in courses"
+          class="userlist"
+        >
+          <div>[[course.text]]</div>
           <hr />
           <div class="user-content">
-            {% if users %} {% for user in users %}
-            <div class="user">
-              <img src="/upload/{{user.icon}}" alt="" />
-              <p>{{user.nickName}}</p>
+            <div
+              v-if="course.users.length>0"
+              v-for="user in course.users"
+              class="user"
+            >
+              <img v-bind:src="baseUrl + user.userIcon" alt="" />
+              <p>[[user.nickName]]</p>
             </div>
-            {% endfor %} {%else%}
-            <p>Oops, on users right now!</p>
-            {% endif %}
+            <p v-else>Oops, on users right now!</p>
           </div>
         </div>
       </div>
@@ -48,6 +59,34 @@
       <div class="foot">Copyright © 2021 Skycoco</div>
     </div>
 
-    <script></script>
+    <script>
+      new Vue({
+        delimiters: ["[[", "]]"],
+        el: "#home",
+        data: {
+          baseUrl: "/upload/",
+          choosed: 1,
+          courses: [],
+        },
+        mounted() {
+          this.getData();
+        },
+        methods: {
+          getData() {
+            axios({
+              url: "/api/",
+              type: "json",
+              method: "get",
+            }).then((res) => {
+              console.log(res.data.courses);
+              this.courses = res.data.courses;
+            });
+          },
+          chooseMenu(id) {
+            this.choosed = id;
+          },
+        },
+      });
+    </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from myblog.models import SiteInfo,Crouses,UserInfo
+from myblog.models import SiteInfo,Courses,UserInfo
 from django.http import HttpResponse, JsonResponse
 
 # Create your views here.
@@ -11,7 +11,7 @@ def index(request):
     print(len(siteInfo))
 
     # menu
-    courses = Crouses.objects.all() 
+    courses = Courses.objects.all() 
     # userInfo
     users = UserInfo.objects.all()
 
@@ -19,7 +19,7 @@ def index(request):
         print(item.title)
     data = {
         "siteinfo":siteInfo[0],
-        "crouses":courses,
+        "courses":courses,
         "users":users
     }
     
@@ -32,11 +32,11 @@ def menu(request):
     siteInfo = SiteInfo.objects.all() #get all the data from siteinfo
 
     # menu
-    courses = Crouses.objects.all() 
+    courses = Courses.objects.all() 
 
     try:
         choosed_id = request.GET['id']
-        choosed = Crouses.objects.filter(id=choosed_id)
+        choosed = Courses.objects.filter(id=choosed_id)
     except:
         return redirect('/')
     
@@ -47,7 +47,7 @@ def menu(request):
 
     data = {
         "siteinfo":siteInfo[0],
-        "crouses":courses,
+        "courses":courses,
         "users":users,
     }
     return render(request, 'menu.html',data)
