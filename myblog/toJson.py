@@ -1,11 +1,11 @@
 from django.db import models
 from rest_framework import serializers
-from myblog.models import Crouses, UserInfo
+from myblog.models import Courses, UserInfo
 
-class Crouses_data(serializers.ModelSerializer):
+class Courses_data(serializers.ModelSerializer):
     class Meta:
         depth=1
-        model = Crouses
+        model = Courses
         fields = '__all__'
 
 class UserInfo_data(serializers.ModelSerializer):
