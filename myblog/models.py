@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class SiteInfo(models.Model):
@@ -20,6 +21,7 @@ class UserInfo(models.Model):
     nickName = models.CharField(null=True,blank=True, max_length=50)
     icon = models.ImageField(upload_to='user_icon/', null=True, blank=True)
     belong = models.ForeignKey(Courses, on_delete=models.SET_NULL, related_name="userinfo_courses", null=True, blank=True)
+    belong_user = models.OneToOneField(User,on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.nickName
