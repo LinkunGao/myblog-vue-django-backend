@@ -24,6 +24,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('menu/', views.menu),
-    path('api/', api.apiTest)
+
+    # backend api
+    path('api/', api.apiTest),
+    path('get-menu-list/', api.getMenuList),
+    path('get-user-list/', api.getUserList),
+
+    #user login
+    path('login/', api.toLogin),
+    path('register/', api.toRegister),
+    path('upload_icon/',api.upload_icon),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
