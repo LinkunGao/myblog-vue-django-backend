@@ -109,7 +109,7 @@ def toLogin(request):
                 'token':token.key,
                 'userinfo':{
                     'id':userinfo.id,
-                    'nickname':userinfo.nickName,
+                    'nickName':userinfo.nickName,
                     'icon':str(userinfo.icon),
                 }
             }
